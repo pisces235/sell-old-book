@@ -1,0 +1,168 @@
+<%- include("../layouts/adminheader.ejs") %>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <form name="sentMessage" id="contactForm" novalidate action="/books/update/<%= book.slug %> ?_method=PUT" method="POST"
+                encType="multipart/form-data">
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Tiêu đề sách</label>
+                        <input type="text" class="form-control" value="<%= book.title %>" name="title" required
+                            data-validation-required-message="Vui lòng nhập tiêu đề.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Đường dẫn hình ảnh </label>
+                        <input type="text" class="form-control" value="<%= book.image %>"  placeholder="http://.../*.jpg" name="image" required
+                            data-validation-required-message="Vui lòng nhập đường dẫn hình ảnh.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Tác giả</label>
+                        <input type="text" class="form-control" value="<%= book.author %>"  name="author" >
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Giá bán</label>
+                        <input type="number" class="form-control"  value="<%= book.price %>"  name="price" required min="0"
+                            data-validation-required-message="Vui lòng nhập giá bán.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Số lượng tồn</label>
+                        <input type="number" class="form-control"  value="<%= book.stored %>"  name="stored" required min="0"
+                            data-validation-required-message="Vui lòng nhập số lượng tồn kho.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Công ty phát hành</label>
+                        <input type="text" class="form-control" value="<%= book.issuing_company %>"   name="issuing_company">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Ngày xuất bản</label>
+                        <input type="text" class="form-control" value="<%= book.publication_date %>"   name="publication_date" required
+                            data-validation-required-message="Vui lòng nhập Ngày xuất bản.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Size</label>
+                        <input type="text" class="form-control" value="<%= book.size %>"   name="size">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Loại bìa</label>
+                        <input type="text" class="form-control" value="<%= book.book_cover_type %>"   name="book_cover_type">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Số trang</label>
+                        <input type="text" class="form-control" value="<%= book.pagenumber %>"   name="pagenumber" required
+                            data-validation-required-message="Vui lòng nhập số trang.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Dịch giả</label>
+                        <input type="text" class="form-control" value="<%= book.translator %>"   name="translator">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>SKU</label>
+                        <input type="text" class="form-control" value="<%= book.SKU %>"   name="SKU">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Nhà xuất bản</label>
+                        <input type="text" class="form-control" value="<%= book.publicsher %>"   name="publicsher">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Loại sách</label>
+                        <select name="type" id="">
+                            <% types.forEach(function(t){ %>
+                                <% if(t.name == book.type){ %> 
+                                    <option value="<%= t.name %>" selected><%= t.name %></option>
+                                <% }else{ %> 
+                                    <option value="<%= t.name %>" ><%= t.name %></option>
+                                <% } %> 
+                            <% }) %> 
+                        </select>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Mô tả</label>
+                        <textarea rows="5" class="form-control" placeholder="Mô tả" name="description" required
+                            data-validation-required-message="Vui lòng nhập a mô tả."><%= book.description %> </textarea>
+                        <p class="help-block text-danger"></p>
+                        <script>
+                            CKEDITOR.replace('description');
+                        </script>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group">
+                        <label>Đề cử sản phẩm ?</label>
+                        <% if(book.featured == true) { %>
+                            <label class="lab_featured"><input type="radio" name="featured" id="" value="false" > <span>Không</span></label>
+                            <label class="lab_featured"><input type="radio" name="featured" id="" value="true" checked> <span> Có chứ</span></label>
+                        <% } else { %>
+                            <label class="lab_featured"><input type="radio" name="featured" id="" value="false" checked> <span>Không</span></label>
+                            <label class="lab_featured"><input type="radio" name="featured" id="" value="true" > <span> Có chứ</span></label>
+                        <% } %>  
+                    </div>
+                </div>
+
+                <br>
+                <div id="success"></div>
+                <button type="submit" class="btn btn-primary" id="sendMessageButton">Sửa</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../layouts/adminfooter.ejs") %>

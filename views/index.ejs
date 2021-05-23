@@ -1,0 +1,180 @@
+<%- include("./layouts/header.ejs") %>
+
+    <div class="container-fluid">
+        <div id="header">
+            <div class="row">
+                <div class="col-2">
+                    <h2>Nơi trao đổi <b>-</b><br> Mua bán</h2>
+                    <a href="/books" class="btn">Mua ngay &#8594</a>
+                </div>
+                <div class="col-2">
+                    <img src="/images/image1.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------ featured categories ------->
+    <div class="categories">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <img src="/images/category-1.jpg" alt="">
+                </div>
+                <div class="col-3">
+                    <img src="/images/category-2.jpg" alt="">
+                </div>
+                <div class="col-3">
+                    <img src="/images/category-3.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------ featured books ------->
+    <div class="small-container">
+        <h2 class="title">Sách đặc sắc</h2>
+        <div class="row">
+            <% var count = 0; %> 
+            <% for( var i = 0; i < books.length; i++){ %> 
+                <% if(books[i].featured){ %>
+                <% count++ %>
+                    <div class="col-4">
+                        <a href="/books/<%= books[i].slug %> ">
+                        <img src="<%= books[i].image %> ">
+                        <h4><%= books[i].title %></h4>
+                        <div class="rating">
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p>
+                            <%= parseFloat(books[i].price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %> <u><sup>đ</sup></u>
+                        </p>
+                        </a>
+                    </div>
+            <% }} %>
+
+            <% if (count == 0) { %> 
+            <h2>Không có sách nào đặc sắc</h2>
+            <% } %> 
+        </div>
+
+        <h2 class="title">Sách mới nhất</h2>
+        <div class="row">
+            <% for (var i = books.length-1; i > books.length - 9; i--) { %>
+                <% if (books[i]) { %> 
+                    <div class="col-4">
+                        <a href="/books/<%= books[i].slug %> ">
+                            <img src="<%= books[i].image %> ">
+                            <h4><%=books[i].title %></h4>
+                            <div class="rating">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <p><%= parseFloat(books[i].price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")   %> <u><sup>đ</sup></u></p>
+                        </a>
+                    </div>
+                <% } %>
+            <% }; %> 
+        </div>
+    </div>
+<!------ offer ------->
+    <div class="offer">
+        <div class="small-container">
+            <div class="row">
+                <% books.forEach(function(b){ %> 
+                <% if(b.hotest){ %> 
+                    <div class="col-2">
+                        <img src="<%= b.image %> " class="offer-img">
+                    </div>
+                    <div class="col-2">
+                        <p>Exclusively Available on RedStore</p>
+                        <h1><%= b.name %></h1>
+                        <h4><%= parseFloat(b.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %> <u><sup>đ</sup></u></h4>
+                        <small>
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod provident, soluta omnis vitae magni culpa placeat, facilis aliquid inventore consectetur tempora officiis eaque hic dicta excepturi laboriosam deserunt aliquam ipsa.
+                        </small>
+                        <a href="/books/<%= b.slug %>" class="btn">Buy now &#8594</a>
+                    </div>
+                <% } %>
+                <% }); %> 
+            </div>
+        </div>
+    </div>
+
+<!------ testimonial ------->
+    <div class="testimonial">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <i class="fa fa-quote-left"></i>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit corporis, cupiditate ad earum molestias labore dolor, inventore vero corrupti nisi illo officiis. Maiores libero illo, officia et impedit modi eos?</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                    </div>
+                    <img src="/images/user-1.png">
+                    <h3>Sean Parker</h3>
+                </div>
+
+                <div class="col-3">
+                    <i class="fa fa-quote-left"></i>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit corporis, cupiditate ad earum molestias labore dolor, inventore vero corrupti nisi illo officiis. Maiores libero illo, officia et impedit modi eos?</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <img src="/images/user-2.png">
+                    <h3>Mike Smith</h3>
+                </div>
+
+                <div class="col-3">
+                    <i class="fa fa-quote-left"></i>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit corporis, cupiditate ad earum molestias labore dolor, inventore vero corrupti nisi illo officiis. Maiores libero illo, officia et impedit modi eos?</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <img src="/images/user-3.png">
+                    <h3>Mobel Joe</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-------- brands ------->
+    <div class="brands">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="/images/logo-coca-cola.png" alt="">
+                </div>
+                <div class="col-5">
+                    <img src="/images/logo-godrej.png" alt="">
+                </div>
+                <div class="col-5">
+                    <img src="/images/logo-oppo.png" alt="">
+                </div>
+                <div class="col-5">
+                    <img src="/images/logo-paypal.png" alt="">
+                </div>
+                <div class="col-5">
+                    <img src="/images/logo-philips.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%- include("./layouts/footer.ejs") %>

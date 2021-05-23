@@ -1,0 +1,171 @@
+<%- include("../layouts/header.ejs") %>
+
+<!-- single product detail -->
+    <div class="small-container single-product">
+        <div class="row">
+            <div class="col-2">
+                <img src="<%= book.image %>" id="product-img">
+
+                <div class="small-img-row">
+                    <% book.gallery.forEach(function (p) { %>
+                        <div class="small-img-col">
+                            <img src="<%= p %> " width="100%" class="small-img">
+                        </div>
+                    <%  }) %>
+                </div>
+            </div>
+            <div class="col-2">
+                <p>Tác giả: <%= book.author %> </p>
+                <h1><%= book.title %> </h1>
+                <div class="rating">
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <h3> <p><%= parseFloat(book.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")   %> <u><sup>đ</sup></u></p></h3>
+                <form action="/add-to-cart/<%= book.slug %>" method="get">
+                    <input type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" 
+                    name="qty" min="1" value="1" class="form-control text-center" style="width: 80px !important;"/>
+                    <button type="submit" class="btn" id="a-add">Thêm vào giỏ hàng</button>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <br>
+            <div class="container mt-4">
+                <h3 class="w-100 text-center">Thông tin chi tiết <i class="fa fa-indent"></i></h3>
+                <table class="table container text-center w-50">
+                    <% if(book.issuing_company){ %>
+                        <tr>
+                            <th>Công ty phát hành </th>
+                            <td>
+                                <%= book.issuing_company %>
+                            </td>
+                        </tr>
+                        <% } %>
+            
+                        <% if(book.publication_date){ %>
+                            <tr>
+                                <th>Ngày xuất bản </th>
+                                <td>
+                                    <%= book.publication_date %>
+                                </td>
+                            </tr>
+                            <% } %>
+                        
+                        <% if(book.size){ %>
+                            <tr>
+                                <th>Kích thước </th>
+                                <td>
+                                    <%= book.size %>
+                                </td>
+                            </tr>
+                            <% } %>
+                        
+                        <% if(book.book_cover_type){ %>
+                            <tr>
+                                <th>Loại bìa </th>
+                                <td>
+                                    <%= book.book_cover_type %>
+                                </td>
+                            </tr>
+                            <% } %>
+                        
+                        <% if(book.pagenumber){ %>
+                            <tr>
+                                <th>Số trang </th>
+                                <td>
+                                    <%= book.pagenumber %>
+                                </td>
+                            </tr>
+                            <% } %>
+                        
+                        <% if(book.SKU){ %>
+                            <tr>
+                                <th>SKU </th>
+                                <td>
+                                    <%= book.SKU %>
+                                </td>
+                            </tr>
+                            <% } %>
+                        
+                        <% if(book.publicsher){ %>
+                            <tr>
+                                <th>Nhà xuất bản </th>
+                                <td>
+                                    <%= book.publicsher %>
+                                </td>
+                            </tr>
+                            <% } %>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <h3 class="container text-center">Mô tả sản phẩm <i class="fa fa-indent"></i></h3>
+                <br>
+                <div class="container mt-4">
+                    <%- book.description %> 
+                </div>
+        </div>
+
+    </div>
+
+    <!-------title ------>
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Sách liên quan</h2>
+            <a href="/books">Nhiều hơn</a>
+        </div>
+    </div>
+
+    <!-------product------>
+    <div class="small-container">
+        <div class="row">
+            
+    <% var count = 0 %> 
+    <% for(var i = 0; i < books.length; i++){ %>
+        <% if(count > 4){break;} %>
+        <% if(books[i].type == book.type && books[i].slug != book.slug){ %> 
+            <% count++; %> 
+            <div class="col-4">
+            <a href="/books/<%= books[i].slug %> ">
+                <img src="<%= books[i].image %> ">
+                <h4><%= books[i].title %></h4>
+                <div class="rating">
+                    
+                </div>
+                <p><%= parseFloat(books[i].price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %> <u><sup>đ</sup></u></p>
+            </a>
+            </div>
+            <% } %> 
+    <% } %> 
+        </div>
+    </div>
+
+<script>
+    //js for toggle gallery
+var ProductImg = document.getElementById('product-img');
+var SmallImg = document.getElementsByClassName('small-img');
+
+SmallImg[0].onclick = function () {
+    ProductImg.src = SmallImg[0].src;
+};
+SmallImg[1].onclick = function () {
+    ProductImg.src = SmallImg[1].src;
+};
+SmallImg[2].onclick = function () {
+    ProductImg.src = SmallImg[2].src;
+};
+SmallImg[3].onclick = function () {
+    ProductImg.src = SmallImg[3].src;
+};
+
+
+</script>
+
+<%- include("../layouts/footer.ejs") %>

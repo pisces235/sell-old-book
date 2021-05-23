@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Old Book</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png"/>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+</head>
+<body onpageshow="get()">
+<!---header --->
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/"><img src="/images/logo.png" width="125px" alt=""></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><a href="/books">Sách</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Danh mục <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <% types.forEach(function (t) { %>
+                                <li>
+                                    <a class="dropdown-item" href="/books/by<%= t.name %>">
+                                        <%= t.name %>
+                                    </a>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </li>
+                    <li><a href="/">Về chúng tôi</a></li>
+                    <li><a href="/">Liên hệ <i class="fa fa-caret-down"></i></a></li>
+                    <% if(login){ %> 
+                        <div class="container-btn">
+                            <a href="/user/logout" class="btn" id="btn-logout" onmouseover="hover_signin()">Đăng xuất</a>
+                        </div>
+                    <% } else { %> 
+                        <div class="container-btn">
+                            <a href="/user/signup" class="btn btn-signup" id="btn-signup">Đăng ký</a>
+                            <a href="/user/signin" class="btn" id="btn-signin" onmouseover="hover_signin()">Đăng nhập</a>
+                        </div>
+                    <% } %>
+                    
+                    
+                </ul>
+                <div id="cart" class="">
+                    <% if(login){ %> 
+                        <a href="/shopping-cart">
+                            <span>Giỏ hàng</span>
+                            <img src="/images/cart.png" width="30px"  height="30px" id="cart-img">
+                            <span class="count-p">
+                                <% if(typeof cart !== "undefined"){ %>
+                                    <%= cart.length  %>
+                                <% } else { %>
+                                    0
+                                <% } %>  
+                            </span>
+                        </a>
+                    <% } else { %>
+                    <% } %>
+                </div> 
+            </nav>
+
+            <img src="/images/menu.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+
+        <div class="w-75 d-block mx-auto">
+            <input type="text" class="search" name="" id="">
+            <a href="" class="search-b"><i class="fa fa-search"></i></a>
+        </div> 
+    </div>
+</header>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png"/>
+    <link rel="stylesheet" href="/css/app-admin.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+</head>
+<body>
+<!---header --->
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/" target="_blank"><img src="/images/logo.png" width="125px" alt=""></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="/admin">Trang chủ</a></li>
+                    <li><a href="/admin/create-book">Thêm sách</a></li>
+                    
+                    <div class="container-btn">
+                        <a href="admin/signin" class="btn btn-signin-admin" id="btn-signin" onmouseover="hover_signin()">Đăng nhập</a>
+                    </div>
+                </ul>
+            </nav>
+
+            <img src="/images/menu.png" class="menu-icon" onclick="menutoggle()">
+
+        </div>
+    </div>
+</header>

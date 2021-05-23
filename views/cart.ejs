@@ -1,0 +1,57 @@
+<%- include("./layouts/header.ejs") %>
+<!------- cart items deitail ------->
+<div class="small-container cart-page">
+    <% var total = 0 %> 
+    <% if(typeof cart != "undefined"){ %> 
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th></th>
+            <th>Subtotal</th>
+        </tr>
+        <% cart.forEach(function(p){ %> 
+            <% var sub = p.qty*p.price %>
+            <% total += +sub %> 
+            <tr>
+                <td>
+                    
+                        <div class="cart-info">
+                        <a href="/books/<%= p.slug %> ">
+                            <img src="<%= p.image %> " alt="">
+                        </a>
+                        <div>
+                            <p><%= p.title %> </p>
+                            <small id="small">Price: <%= parseFloat(p.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %><u><sup>đ</sup></u></small>
+                        </div>
+                        </div>
+                </td>
+                <td><%= p.qty %></td>
+                <td>
+                    <a href="/update/<%= p.slug  %>?action=add">+&nbsp;&nbsp;</a>
+                    <a href="/update/<%= p.slug  %>?action=remove">-&nbsp;&nbsp;</a>
+                    <a href="/update/<%= p.slug  %>?action=clear">Xóa</a>
+                </td>
+                <td><%= parseFloat(sub).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %><u><sup>đ</sup></u></td>
+            </tr>
+        <% }) %> 
+    </table>
+    <div class="flex-row">
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Total</td>
+                    <td><%= parseFloat(total).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %><u><sup>đ</sup></u></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <a href="/clear" class="btn btn-danger float-right">Bỏ giỏ hàng</a>
+    <a href="/books" class="btn btn-danger float-right">Mua thêm</a>
+    <% } else { %> 
+    <h3 class="text-center">Giỏ hàng trống</h3>
+    <% } %> 
+</div>
+
+<%- include("./layouts/footer.ejs") %>

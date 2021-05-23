@@ -1,0 +1,43 @@
+<%- include("../layouts/header.ejs") %>
+
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Tất cả sách</h2>
+        <label for="sx"></label>
+        <select name="" id="sx">
+            <option value="">Sắp xếp theo</option>
+            <option value="1">Giá cao đến thấp</option>
+            <option value="2">Giá thấp đến cao</option>
+            <option value="2">Phổ biến</option>
+            <option value="3">Đánh giá</option>
+            <option value="4">Bán nhiều</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <% books.forEach(function(b){ %>
+            <div class="col-4">
+                <a href="/books/<%= b.slug %>  ">
+                    <img src="<%= b.image %>">
+                    <h6>
+                        <%= b.title %> 
+                    </h6>
+                    <div class="rating">
+                        <div class="rating">
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                    </div>
+                    <p>
+                        <%= parseFloat(b.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %> %>  <u><sup>đ</sup></u>
+                    </p>
+                </a>
+            </div>
+        <% }) %> 
+    </div>
+</div>
+
+<%- include("../layouts/footer.ejs") %>
