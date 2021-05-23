@@ -99,7 +99,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-var POST = 3000 || process.env.PORT
+var POST = process.env.PORT || 3000
 app.listen(POST, function(){
 
 })
