@@ -40,6 +40,7 @@ router.get('/', function(req, res, next) {
 router.get('/search', (req, res, next) => {
   var listbook = [];
   var search = req.query.search;
+  req.app.search = search;
   Book.find(function(err, books){
     if(err) console.log(err);
     for(var i = 0; i < books.length; i++){
@@ -83,46 +84,53 @@ router.post('/filter', function(req, res, next){
 
 router.post('/filter-search', function(req, res, next){
   var filter = req.body.filter;
-  var books = req.app.searchlist;
-  if(filter == 'default') {
-    res.render("books/main", { books });
-  }
-  if(filter == "asc") {
-    books.sort(function (a, b) {
-      return b.price - a.price;
-    });
-    res.render("books/main", { books });
-  }
-  if(filter == "desc") {
-    books.sort(function (a, b) {
-      return a.price - b.price;
-    });
-    res.render("books/main", { books });
-  }
+  var listbook = req.app.searchlist;
+  var search = req.app.search;
+  Book.find(function(err, books){
+    if(err) console.log(err);
+    if(filter == 'default') {
+      res.render("books/search", { listbook, search });
+    }
+    if(filter == "asc") {
+      listbook.sort(function (a, b) {
+        return b.price - a.price;
+      });
+      res.render("books/search", { listbook, search });
+    }
+    if(filter == "desc") {
+      listbook.sort(function (a, b) {
+        return a.price - b.price;
+      });
+      res.render("books/search", { listbook, search });
+    }
+  });
 });
 
 router.post('/filter-cat', function(req, res, next){
   var filter = req.body.filter;
   var books = req.app.searchbytypelist;
-  if(filter == 'default') {
-    res.render("books/main", { books });
-  }
-  if(filter == "asc") {
-    books.sort(function (a, b) {
-      return b.price - a.price;
-    });
-    res.render("books/main", { books });
-  }
-  if(filter == "desc") {
-    books.sort(function (a, b) {
-      return a.price - b.price;
-    });
-    res.render("books/main", { books });
-  }
+  types.findOne({ name: req.app.type }, function(err, t){
+    if(filter == 'default') {
+      res.render("books/cat", { books, t });
+    }
+    if(filter == "asc") {
+      books.sort(function (a, b) {
+        return b.price - a.price;
+      });
+      res.render("books/cat", { books, t });
+    }
+    if(filter == "desc") {
+      books.sort(function (a, b) {
+        return a.price - b.price;
+      });
+      res.render("books/cat", { books, t });
+    }
+  })
 });
 
 router.get('/books/by:type', function(req, res, next){
   var type = req.params.type;
+  req.app.type = type
   types.findOne({ name: type }, function(err, t){
     Book.find({ type : type}, function(err, books){
       if(err) console.log(err);
