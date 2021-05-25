@@ -1,0 +1,48 @@
+<%- include("../layouts/header.ejs") %>
+
+<% if(listbook.length > 0){ %>
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Tất cả sách có từ khóa '<%= search %>'</h2>
+            <label for="sx"></label>
+            <form action="/filter-search" method="POST">
+                <select name="filter" id="sx" onchange="this.form.submit()" >
+                    <option value="" disabled selected>Sắp xếp theo</option>
+                    <option value="default">Mặc định</option>
+                    <option value="asc">Giá cao đến thấp</option>
+                    <option value="desc">Giá thấp đến cao</option>
+                </select>
+            </form>
+        </div>
+    
+        <div class="row">
+            <% listbook.forEach(function(b){ %>
+                <div class="col-4">
+                    <a href="/books/<%= b.slug %>  ">
+                        <img src="<%= b.image %>">
+                        <h6>
+                            <%= b.title %> 
+                        </h6>
+                        <div class="rating">
+                            <div class="rating">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                        </div>
+                        <p>
+                            <%= parseFloat(b.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %> %>  <u><sup>đ</sup></u>
+                        </p>
+                    </a>
+                </div>
+            <% }) %> 
+        </div>
+    </div>
+<% } else { %>  
+    <h1 class="text-center w-100">Không có sách mang từ khóa '<%= search %>' trong hệ thống</h1>
+    <a href="/books" class="btn text-light ml-4">Xem tất cả sách ?</a>
+<% } %> 
+
+<%- include("../layouts/footer.ejs") %>

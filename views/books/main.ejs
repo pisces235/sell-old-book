@@ -4,14 +4,15 @@
     <div class="row row-2">
         <h2>Tất cả sách</h2>
         <label for="sx"></label>
-        <select name="" id="sx">
-            <option value="">Sắp xếp theo</option>
-            <option value="1">Giá cao đến thấp</option>
-            <option value="2">Giá thấp đến cao</option>
-            <option value="2">Phổ biến</option>
-            <option value="3">Đánh giá</option>
-            <option value="4">Bán nhiều</option>
-        </select>
+        
+        <form action="/filter" method="POST">
+            <select name="filter" id="sx" onchange="this.form.submit()" >
+                <option value="" disabled >Sắp xếp theo</option>
+                <option value="default">Mặc định</option>
+                <option value="asc">Giá cao đến thấp</option>
+                <option value="desc">Giá thấp đến cao</option>
+            </select>
+        </form>
     </div>
 
     <div class="row">

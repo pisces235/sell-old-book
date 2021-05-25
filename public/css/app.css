@@ -64,6 +64,11 @@ nav a .fa-caret-down{
     color: #333 !important;
     font-size: 30px !important;
 }
+.search-b{
+    background-color: transparent;
+    outline: none !important;
+    border: none !important;
+}
 
 .container{
     max-width: 1300px;
@@ -235,7 +240,7 @@ small{
 }
 .col-5{
     min-width: 160px;
-    max-width: 200px;
+    max-width: 20%;
 }
 .col-5 img{
     width: 100%;
@@ -525,8 +530,9 @@ form a{
 }
 #cart{
     position: relative;
-    right: -800px;
-    top: -26px;
+    right: 100px;
+    top: -28px;
+    float: right;
 }
 #cart span:first-child{
     position: relative;
@@ -544,17 +550,36 @@ form a{
 .dropdown-item:hover{
     background-color: #f7f7eb !important;
 }
+.brands .col-5{
+    flex-basis: 100% !important;
+    align-items: center;
+}
 
 /*-----------media query for menu-------*/
-@media only screen and (max-width: 1024px){
+@media only screen and (max-width: 1250px){
     .container-btn{
         margin-top: 20px;
     }
     .btn-signup{
         margin-left: 20% !important;
     }
+    
+    .col-5{
+        max-width: 33%;
+    }
+    
     #cart{
-        right: -300px;
+        right: 0;
+    }
+}
+@media only screen and (max-width: 1024px){
+    nav ul{
+        left: 0;
+        width: 60%;
+    }
+    #cart{
+        right: 400px;
+        top: 40px;
     }
 }
 
@@ -603,18 +628,30 @@ form a{
         margin-right: 0;
         padding: 0;
     }
-    
+    #cart{
+        position: static;
+    }
     table{
         width: 100% !important;
         margin: 0;
     }
-    #cart{
-        right: -470px;
-        top: 0;
+    .col-4{
+        flex-basis: 33%;
+    }
+    .col-5{
+        flex-basis: 33%;
+    }
+    
+    .col-2{
+        text-align: center;
+    }
+    .col-4{
+        text-align: center;
     }
 }
 /*-----------media query for less than 600 screen size-------*/
 @media only screen and (max-width: 600px){
+    
     .row{
         align-items: center !important;
     }
@@ -635,26 +672,5 @@ form a{
     }
     .cart-info p{
         display: none;
-    }
-    #cart{
-        right: -290px;
-    }
-}
-@media only screen and (max-width: 540px){
-    
-    #cart{
-        right: -260px;
-    }
-}
-@media only screen and (max-width: 415px){
-    
-    #cart{
-        right: -70px;
-    }
-}
-@media only screen and (max-width: 320px){
-    
-    #cart{
-        right: -20px;
     }
 }

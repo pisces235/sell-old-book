@@ -42,7 +42,7 @@
                         </ul>
                     </li>
                     <li><a href="/">Về chúng tôi</a></li>
-                    <li><a href="/">Liên hệ <i class="fa fa-caret-down"></i></a></li>
+                    <li><a href="#copyright">Liên hệ</a></li>
                     <% if(login){ %> 
                         <div class="container-btn">
                             <a href="/user/logout" class="btn" id="btn-logout" onmouseover="hover_signin()">Đăng xuất</a>
@@ -78,8 +78,10 @@
         </div>
 
         <div class="w-75 d-block mx-auto">
-            <input type="text" class="search" name="" id="">
-            <a href="" class="search-b"><i class="fa fa-search"></i></a>
+            <form action="/search" method="get">
+                <input type="text" class="search" name="search" id="">
+                <button type="submit" class="search-b"><i class="fa fa-search"></i></button>
+            </form>
         </div> 
     </div>
 </header>

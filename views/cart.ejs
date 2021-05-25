@@ -32,7 +32,7 @@
                     <a href="/update/<%= p.slug  %>?action=remove">-&nbsp;&nbsp;</a>
                     <a href="/update/<%= p.slug  %>?action=clear">Xóa</a>
                 </td>
-                <td><%= parseFloat(sub).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %><u><sup>đ</sup></u></td>
+                <td><span id="subtotal"><%= parseFloat(sub).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %></span><u><sup>đ</sup></u></td>
             </tr>
         <% }) %> 
     </table>
@@ -41,17 +41,30 @@
             <table>
                 <tr>
                     <td>Total</td>
-                    <td><%= parseFloat(total).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %><u><sup>đ</sup></u></td>
+                    <td><span id="total"><%= parseFloat(total).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %></span><u><sup>đ</sup></u></td>
                 </tr>
             </table>
         </div>
     </div>
     
-    <a href="/clear" class="btn btn-danger float-right">Bỏ giỏ hàng</a>
+    <a href="/clear" class="btn btn-danger float-right " id="clearcard">Bỏ giỏ hàng</a>
     <a href="/books" class="btn btn-danger float-right">Mua thêm</a>
+    <a href="" class="btn btn-danger float-right" onclick="if(confirm('Hệ thống đang trong giai đoạn phát triển, chức năng thanh toán sẽ được nâng cấp sau !')) {
+        window.location = '/'
+    }">Thanh toán</a>
+    
+
+    
     <% } else { %> 
     <h3 class="text-center">Giỏ hàng trống</h3>
     <% } %> 
 </div>
+
+<script>
+    document.getElementById("clearcard").addEventListener("click", function() {
+        if(!confirm('Xác nhận xóa giỏ hàng ?'))
+            return false
+    })
+</script>
 
 <%- include("./layouts/footer.ejs") %>

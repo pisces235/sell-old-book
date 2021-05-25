@@ -7,7 +7,6 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var cartRouter = require('./routes/cart');
-var adminRouter = require('./routes/admin');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
@@ -79,7 +78,6 @@ app.use(function(req, res, next){
   res.locals.cart = req.session.cart;
   next();
 })
-app.use('/admin', adminRouter);
 app.use('/user', userRouter);
 app.use('/cart', cartRouter);
 app.use('/', indexRouter);
@@ -99,7 +97,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-var POST = process.env.PORT || 3000
+var POST = 3000 || process.env.PORT;
 app.listen(POST, function(){
 
 })
